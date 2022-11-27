@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 import { simpleCalculator } from "./simpleCalculator.js";
+import { trigonometricCalculator } from "./trigonometricCalculator.js";
 // Prints Calculator in the console of blue color using # (hashes)
 console.log(chalk.blue("     ###         ##       ##         ###         ##     ##  ###########      ###        ########"));
 console.log(chalk.blue("  ##     ##    ## ##     ##       ##     ##     ##     ##       ##        ##     ##      ##     ##"));
@@ -25,5 +26,8 @@ let calculatorType = await inquirer.prompt([
 ]);
 switch (calculatorType.type) {
     case "Simple (Only arithmetic operations can be performed)":
-        console.log(simpleCalculator());
+        simpleCalculator();
+        break;
+    case "Trigonometric (Such as sin(x),cos(x) etc...)":
+        trigonometricCalculator();
 }
