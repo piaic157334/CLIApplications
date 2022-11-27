@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
+import { logCalculator } from "./logCalculator.js";
 import { simpleCalculator } from "./simpleCalculator.js";
 import { trigonometricCalculator } from "./trigonometricCalculator.js";
 // Prints Calculator in the console of blue color using # (hashes)
@@ -30,4 +31,7 @@ switch (calculatorType.type) {
         break;
     case "Trigonometric (Such as sin(x),cos(x) etc...)":
         trigonometricCalculator();
+        break;
+    case "Logarithmic (Logarithm problems )":
+        logCalculator();
 }
