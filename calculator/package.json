@@ -10,7 +10,6 @@
   "dependencies": {
     "@types/inquirer": "^9.0.3",
     "chalk": "^5.1.2",
-    "inquirer": "^9.1.4",
-    "prompt-sync": "^4.2.0"
+    "inquirer": "^9.1.4"
   }
 }
