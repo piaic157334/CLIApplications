@@ -15,13 +15,16 @@ const trigonometricCalculator = async () => {
             ],
         },
     ]);
-    let angleInDegrees = await inquirer.prompt([
-        {
-            name: "angle",
-            type: "number",
-            message: "Enter the angle in degrees : ",
-        },
-    ]);
+    let angleInDegrees;
+    do {
+        angleInDegrees = await inquirer.prompt([
+            {
+                name: "angle",
+                type: "number",
+                message: "Enter the angle in degrees : ",
+            },
+        ]);
+    } while (isNaN(angleInDegrees.angle));
     switch (operation.trigonometricOperation) {
         case "sin(x)":
             console.log(chalk.white("Your answer is = "), chalk.blue.bold(Math.sin((parseInt(angleInDegrees.angle) * Math.PI) / 180)));
