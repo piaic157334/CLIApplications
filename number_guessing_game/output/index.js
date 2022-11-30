@@ -1,6 +1,14 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 let userGuess = {}, numberToBeGuessed = 0, numberToBeGuessedExtension, score = -1, stage = 0;
+// Welcome message
+console.log("  ......  ...   ....  ...........  ......       .......     .......    .....       .....  ............  ");
+console.log("  .....  .....  ..... ..........   .....      ..........   ..........  ......     ......  .......... ");
+console.log("    ...  ......  ...  ...          ...       ....     ... ...      ... ......     ......  ...  ");
+console.log("    ... ... ... ...   ........     ...      ....          ...      ... ... ...   ... ...  ......... ");
+console.log("     .....  .....     ...          ...       .....     .. ...     ...  ...   .....   ...  ...  ");
+console.log("     .....   .....    ..........   .......... ..........   ..........  ....  .....  ....  .......... ");
+console.log("      ...     ...     ...........  ..........   ........    ........   ...... ...  .....  ........... ");
 const askANumber = async () => {
     //   Logic to increase the difficulty level of the game
     numberToBeGuessedExtension = "1";
@@ -12,18 +20,36 @@ const askANumber = async () => {
     console.log("The number to be Guessed is 👉🏻👉🏻", numberToBeGuessed);
     // Asking user the number to be guessed
     do {
+        if (userGuess.userGuessedNumber === "H" ||
+            userGuess.userGuessedNumber === "h") {
+            console.log(chalk.magenta("HINT: "), chalk.green(`The number you have to guess is between ${numberToBeGuessed - 15} and ${numberToBeGuessed + 15}`));
+        }
         userGuess = await inquirer.prompt([
             {
                 name: "userGuessedNumber",
-                type: "number",
-                message: `Guess a number or write 'h' for hint `,
+                type: "input",
+                message: `Guess a number or write 'h' for hint :`,
             },
         ]);
-    } while (isNaN(Number(userGuess.userGuessedNumber)));
+    } while (isNaN(Number(userGuess.userGuessedNumber)) ||
+        userGuess.userGuessedNumber === "" ||
+        userGuess.userGuessedNumber === "h" ||
+        userGuess.userGuessedNumber === "H");
 };
-//LOgic to increase level and score if the user guesses the right number
+//Logic to increase level and score if the user guesses the right number
 do {
     stage++, score++;
     console.log(chalk.yellow("Stage: ", stage, "\t", "Score: ", score));
     await askANumber();
-} while ((userGuess === null || userGuess === void 0 ? void 0 : userGuess.userGuessedNumber) === numberToBeGuessed);
+    if (Number(userGuess === null || userGuess === void 0 ? void 0 : userGuess.userGuessedNumber) === numberToBeGuessed) {
+        console.log(chalk.yellow(`\n-------------------------------------- `));
+        console.log(chalk.bgYellow(` Hurrah! You have cleared stage no. ${stage} `));
+        console.log(chalk.yellow(`-------------------------------------- \n`));
+        console.log(chalk.yellow(`Now play stage no. ${stage + 1}`));
+    }
+    else {
+        console.log(chalk.red(`\n---------------- `));
+        console.log(chalk.bgRed(` Oops! You lost `));
+        console.log(chalk.red(`---------------- \n`));
+    }
+} while (Number(userGuess === null || userGuess === void 0 ? void 0 : userGuess.userGuessedNumber) === numberToBeGuessed);
