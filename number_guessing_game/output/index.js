@@ -43,13 +43,13 @@ do {
     await askANumber();
     if (Number(userGuess === null || userGuess === void 0 ? void 0 : userGuess.userGuessedNumber) === numberToBeGuessed) {
         console.log(chalk.yellow(`\n-------------------------------------- `));
-        console.log(chalk.bgYellow(` Hurrah! You have cleared stage no. ${stage} `));
+        console.log(chalk.bgYellow.black(` Hurrah! You have cleared stage no. ${stage} `));
         console.log(chalk.yellow(`-------------------------------------- \n`));
         console.log(chalk.yellow(`Now play stage no. ${stage + 1}`));
     }
     else {
-        console.log(chalk.red(`\n---------------- `));
-        console.log(chalk.bgRed(` Oops! You lost `));
-        console.log(chalk.red(`---------------- \n`));
+        console.log(chalk.red(`\n---------------------------------- `));
+        console.log(chalk.bgRed(` Oops! You lost. The number was ${numberToBeGuessed} `));
+        console.log(chalk.red(`---------------------------------- \n`));
     }
 } while (Number(userGuess === null || userGuess === void 0 ? void 0 : userGuess.userGuessedNumber) === numberToBeGuessed);
