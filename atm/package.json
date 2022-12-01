@@ -1,0 +1,13 @@
+{
+  "name": "atm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsc && node output/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

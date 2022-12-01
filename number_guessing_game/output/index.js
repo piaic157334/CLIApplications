@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import chalk from "chalk";
 import inquirer from "inquirer";
 let userGuess = {}, numberToBeGuessed = 0, numberToBeGuessedExtension, score = -1, stage = 0;
@@ -17,7 +18,6 @@ const askANumber = async () => {
     }
     numberToBeGuessed = Math.random() * Number(numberToBeGuessedExtension);
     numberToBeGuessed = Number(numberToBeGuessed.toFixed());
-    console.log("The number to be Guessed is 👉🏻👉🏻", numberToBeGuessed);
     // Asking user the number to be guessed
     do {
         if (userGuess.userGuessedNumber === "H" ||

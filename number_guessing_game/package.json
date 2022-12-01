@@ -1,12 +1,10 @@
 {
-  "name": "number_guessing_game",
+  "name": "number-guessing-game-by-abu-hurairah",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "bin": "output/index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
