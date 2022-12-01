@@ -9,7 +9,7 @@ console.log("                        &@@.     .@@&       ^@@G   @@&      @@@. #@
 console.log("                        &@@.      7@@G.    ^@@&.   @@&    ^&@@~  .&@&^    .B@@!                     ");
 console.log("                      !B@@@#Y      :G@@&##&@&J   J#@@@&&&@@&Y.     Y&@&##&@@G.                      ");
 console.log("                      .^^^^^:         :~!!^.     :^^^^^^^:.          .^!!~:                         ");
-let todos = [], newTodo, nextAction;
+let todos = [], newTodo, nextAction, todoNumber;
 const addTodo = async () => {
     do {
         newTodo = await inquirer.prompt([
@@ -37,6 +37,30 @@ const askUserForNextAction = async () => {
             choices: ["Add new todo", "Delete a todo", "Read all todos"],
         },
     ]);
+    const printAllTodos = () => {
+        console.log(chalk.bgYellow.black("Printing all the todos you have added.\n"));
+        todos.forEach((todo, index) => {
+            console.log(chalk.bgYellow.black(index + 1 + ")"), `Title: ${todo.title}`);
+            console.log("Description", `: ${todo.description}`);
+        });
+        console.log("\n");
+    };
+    const deleteTodo = async () => {
+        printAllTodos();
+        do {
+            todoNumber = await inquirer.prompt([
+                {
+                    name: "todoID",
+                    type: "number",
+                    message: "Enter the number of todo you want to delete.",
+                },
+            ]);
+        } while (isNaN(Number(todoNumber === null || todoNumber === void 0 ? void 0 : todoNumber.todoID)) ||
+            Number(todoNumber === null || todoNumber === void 0 ? void 0 : todoNumber.todoID) > todos.length);
+        todos = todos.filter((todo) => todo.id !== Number(todoNumber === null || todoNumber === void 0 ? void 0 : todoNumber.todoID) - 1);
+        console.log("Todo has successfully deleted.");
+        console.log(todos);
+    };
     switch (nextAction.action) {
         case "Add new todo":
             await addTodo();
@@ -44,17 +68,12 @@ const askUserForNextAction = async () => {
         case "Read all todos":
             printAllTodos();
             break;
+        case "Delete a todo":
+            await deleteTodo();
+            break;
         default:
             break;
     }
-};
-const printAllTodos = () => {
-    console.log(chalk.bgYellow.black("Printing all the todos you have added."));
-    todos.forEach((todo, index) => {
-        console.log(chalk.bgYellow.black(index + 1 + ")"), `Title: ${todo.title}`);
-        console.log("Description", `: ${todo.description}`);
-    });
-    console.log("\n");
 };
 await addTodo();
 do {
