@@ -9,5 +9,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/inquirer": "^9.0.3",
+    "chalk": "^5.1.2",
+    "inquirer": "^9.1.4"
+  }
 }
