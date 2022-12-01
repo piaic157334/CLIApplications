@@ -2,6 +2,7 @@
 
 import chalk from "chalk";
 import inquirer from "inquirer";
+//types defining for objects
 interface User {
   username: string;
   pin: string;
@@ -10,6 +11,7 @@ interface User {
 interface Amount {
   amount: number | string;
 }
+// dummy data and other variable initialization
 let bankRecord: Array<User> = [
   { username: "ziaKhan", pin: "1234", balance: 122000000 },
   { username: "daniyalNagori", pin: "1234", balance: 14000000 },
@@ -21,6 +23,7 @@ let bankRecord: Array<User> = [
 let userInfo: User,
   user: User | undefined = { username: "", pin: "", balance: 0 },
   amountToBeWithDraw: Amount;
+//function to ask user info
 const atm = async () => {
   do {
     userInfo = await inquirer.prompt([
@@ -35,27 +38,32 @@ const atm = async () => {
         message: "Enter your 4 digit pin: ",
       },
     ]);
-    console.log(typeof userInfo?.pin);
   } while (userInfo?.pin.length !== 4 || userInfo?.username.length < 3);
-  console.log(userInfo);
+  //   checking user's credentials if it is true or not
   if (bankRecord.find((data) => data.username === userInfo.username)) {
     if (bankRecord.find((data) => data.pin === userInfo.pin)) {
       user = bankRecord.find((data) => data.username === userInfo.username);
       console.log("Your account balance is", chalk.yellow(user?.balance));
-      amountToBeWithDraw = await inquirer.prompt([
-        {
-          name: "amount",
-          type: "number",
-          message: "How much money you want to withdraw?",
-        },
-      ]);
+      //   asking to how much money customer wants to with draw
+      do {
+        amountToBeWithDraw = await inquirer.prompt([
+          {
+            name: "amount",
+            type: "number",
+            message: "How much money you want to withdraw?",
+          },
+        ]);
+      } while (isNaN(Number(amountToBeWithDraw?.amount)));
+      //checking if the user has sufficient balance or not
       if (user?.balance) {
-        if (user.balance > Number(amountToBeWithDraw.amount)) {
+        if (user.balance >= Number(amountToBeWithDraw.amount)) {
           console.log(
             `The remaining amount is ${
               user.balance - Number(amountToBeWithDraw.amount)
             }`
           );
+        } else {
+          console.log(chalk.bgRed("You have in sufficient balance."));
         }
       }
     } else {

@@ -31,13 +31,15 @@ const atm = async () => {
         if (bankRecord.find((data) => data.pin === userInfo.pin)) {
             user = bankRecord.find((data) => data.username === userInfo.username);
             console.log("Your account balance is", chalk.yellow(user === null || user === void 0 ? void 0 : user.balance));
-            amountToBeWithDraw = await inquirer.prompt([
-                {
-                    name: "amount",
-                    type: "number",
-                    message: "How much money you want to withdraw?",
-                },
-            ]);
+            do {
+                amountToBeWithDraw = await inquirer.prompt([
+                    {
+                        name: "amount",
+                        type: "number",
+                        message: "How much money you want to withdraw?",
+                    },
+                ]);
+            } while (isNaN(Number(amountToBeWithDraw === null || amountToBeWithDraw === void 0 ? void 0 : amountToBeWithDraw.amount)));
             if (user === null || user === void 0 ? void 0 : user.balance) {
                 if (user.balance > Number(amountToBeWithDraw.amount)) {
                     console.log(`The remaining amount is ${user.balance - Number(amountToBeWithDraw.amount)}`);
