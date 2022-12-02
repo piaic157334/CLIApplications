@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import chalk from "chalk";
 import inquirer from "inquirer";
 
@@ -44,7 +46,17 @@ const askingCurrencyInfo = async () => {
   } while (
     isNaN(Number(amount?.amountToConvert)) ||
     Number(amount?.amountToConvert) < 1 ||
-    isNaN(Number(amount?.amountOfUnit))
+    isNaN(Number(amount?.amountOfUnit)) ||
+    Number(amount?.amountOfUnit) < 0
+  );
+  console.log(
+    chalk.bgYellow.black(
+      ` ${
+        Number(amount.amountOfUnit) < 1
+          ? Number(amount.amountToConvert) * Number(amount.amountOfUnit)
+          : Number(amount.amountToConvert) / Number(amount.amountOfUnit)
+      } `
+    )
   );
 };
 askingCurrencyInfo();

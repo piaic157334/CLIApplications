@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import inquirer from "inquirer";
 let currencyInfo, amount;
 const askingCurrencyInfo = async () => {
@@ -30,6 +31,11 @@ const askingCurrencyInfo = async () => {
             },
         ]);
     } while (isNaN(Number(amount === null || amount === void 0 ? void 0 : amount.amountToConvert)) ||
-        Number(amount === null || amount === void 0 ? void 0 : amount.amountToConvert) < 1);
+        Number(amount === null || amount === void 0 ? void 0 : amount.amountToConvert) < 1 ||
+        isNaN(Number(amount === null || amount === void 0 ? void 0 : amount.amountOfUnit)) ||
+        Number(amount === null || amount === void 0 ? void 0 : amount.amountOfUnit) < 0);
+    console.log(chalk.bgYellow.black(` ${Number(amount.amountOfUnit) < 1
+        ? Number(amount.amountToConvert) * Number(amount.amountOfUnit)
+        : Number(amount.amountToConvert) / Number(amount.amountOfUnit)} `));
 };
 askingCurrencyInfo();
