@@ -1,0 +1,12 @@
+{
+  "name": "currency-converter-by-abu-hurairah",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsc && node output/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
