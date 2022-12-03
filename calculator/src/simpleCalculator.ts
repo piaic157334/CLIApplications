@@ -43,7 +43,8 @@ const simpleCalculator = async () => {
     values.question.includes("v") ||
     values.question.includes("x") ||
     values.question.includes("y") ||
-    values.question.includes("z")
+    values.question.includes("z") ||
+    isNaN(Number(values.question[values.question.length - 1]))
   );
   console.log(
     chalk.white("Your answer is = "),
